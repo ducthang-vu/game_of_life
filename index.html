@@ -8,24 +8,27 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    
-
-
-    <!-- TEMPLATE-->
-    <script id="entry-template" type="text/x-handlebars-template">
-        <div class="entry">
-            <h1>{{title}}</h1>
-            <div class="body">
-            {{body}}
-            </div>
+    <header class="page-header mb-30">
+        <h1 class="text-center">Conway's Game of Life</h1>
+    </header>
+    <main>
+        <div class="container flex">
+            <section class="description-section">
+                <h2 class="mb-15">How it works</h2>
+                <p class="mb-15">
+                    Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input.
+                </p>
+                <p class="mb-15">
+                    See the rules of the game <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">here</a>
+                </p>
+                <p class="mb-15">
+                    In this implementation, the field is a 150 * 100 grid. On the page load, a random number of cell (approximately 10%) shall be populated. This constitutes the seed of the system.
+                </p>
+            </section>
+            <canvas id="canvas"></canvas>
         </div>
-    </script>
-
+    </main>
     <!-- SCRIPT -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/89ef06fff6.js" crossorigin="anonymous"></script>
     <script src="script/main.js"></script>
 </body>
 </html> 

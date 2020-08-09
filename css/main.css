@@ -34,6 +34,13 @@ li {
     display: block;
 }
 
+
+.container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
 .no-display {
     display: none;
 }
@@ -50,6 +57,14 @@ li {
 
 .flex {
     display: flex;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+} 
+
+.mb-30 {
+    margin-bottom: 30px;
 }
 
 .text-small {
@@ -82,4 +97,30 @@ li {
 
 .in-block {
     display: inline-block;
+}
+
+/* BODY */
+body {
+    background-color: #00123B;
+    color: white;
+}
+
+.page-header {
+    background-color: snow;
+    padding: 25px;
+    color: black;
+}
+
+main > .container{
+    justify-content: space-between;
+}
+
+.description-section {
+    flex-basis: 400px;
+    width: 300px;
+}
+
+#canvas {
+    margin: 0 auto;
+    background: #04BFBF;
 }
