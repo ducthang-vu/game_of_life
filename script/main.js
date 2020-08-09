@@ -40,8 +40,15 @@ function getCells(width, height) {
 
 /** @class Animation representing the state of the canvas, with methods for executing the animation */
 class Animation{
-    static defaultSeed = [[12, 12], [14, 13], [11, 14], [12, 14], [15, 14], [16, 14], [17, 14]]
+    static defaultSeed = [[12, 12], [14, 13], [11, 14], [12, 14], [15, 14], [16, 14], [17, 14]] 
 
+    /**
+     * Creates an instance of Animation.
+     *
+     * @constructor
+     * @param {number} [prob="null"] The probability of any cell to be alive at the initial state, should be between 0 and
+     *                               1. If not provided, the Animation.defaultSeed shall be the initial state.
+     */
     constructor(prob=null) {
         this.state = prob ? this.randomSeed(prob) : this.defaultSeeding()
         this.animate()
@@ -58,11 +65,16 @@ class Animation{
         return list
     }
 
-    randomSeed(prob) {
+    /**
+     * Creates an array of arrays, representing every cell of the grid, assigning randomly a boolean, the alive cell being true, otherwise false.
+     *
+     * @param {number} probability The probability of a cell to be alice; should be between 0 and 1.
+     */
+    randomSeed(probability) {
         let list = getCells(maxWidth, maxHeight)
         for (let i = 0; i < maxWidth; i++) {
             for (let k = 0; k < maxHeight; k++) {
-                list[i][k] = Math.random() < prob
+                list[i][k] = Math.random() < probability
             }
         } 
         return list
