@@ -46,8 +46,9 @@ class Animation{
      * Creates an instance of Animation.
      *
      * @constructor
-     * @param {number} [prob="null"] The probability of any cell to be alive at the initial state, should be between 0 and
-     *                               1. If not provided, the Animation.defaultSeed shall be the initial state.
+     * @param {number} [prob="null"] The probability of any cell to be alive at the initial state, should be between 0 
+     *                               (excluded) and 1. If not provided or 0, the Animation.defaultSeed shall be the     
+     *                               initial state.
      */
     constructor(prob=null) {
         this.state = prob ? this.randomSeed(prob) : this.defaultSeeding()
