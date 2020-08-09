@@ -17,7 +17,7 @@ For fruther insights see [here](https://en.wikipedia.org/wiki/Conway%27s_Game_of
 None
 
 ## Feature
-In this implementation, the field is a 150x100 grid. On the page load, a random number of cell (approximately 20%) shall be populated. This constitutes the seed of the system.
+In this implementation, the field is a 150x100 grid, which is also a toroid. On the page load, a random number of cell (approximately 20%) shall be populated. This constitutes the seed of the system.
 
 To start a new game, reload the page.
 
