@@ -1,20 +1,21 @@
-/* GLOBAL VARIABLE (CANVAS) */
+/* GLOBAL VARIABLES (CANVAS) */
 const canvas = document.getElementById('canvas');
 const c = canvas.getContext('2d');
+
 
 /* FIX CANVAS */
 canvas.width = 600
 canvas.height = 400
 
 
-/* GLOBAL VARIABLE (CANVAS MEASURES)*/
+/* GLOBAL VARIABLES (CANVAS MEASURES)*/
 const scale = 4
 c.scale(scale, scale)
 const maxWidth = canvas.width / scale
 const maxHeight = canvas.height / scale
 
-/* UTITLITIES */
-/* Make canvas a toroid and functions relating to cells*/
+/* UTILITIES*/ 
+/* Making canvas a toroid */
 function getX(rawX) {
     return (rawX + maxWidth) % maxWidth
 }
@@ -23,6 +24,12 @@ function getY(rawY) {
     return (rawY + maxHeight) % maxHeight
 }
 
+/**
+ * Returning a array of arrays, representing a grid. Width and height are passed as parameters.
+ *
+ * @param {number} width
+ * @param {number} height 
+ */
 function getCells(width, height) {
     let cells = new Array(width)
     for (let i = 0; i < width; i++) {
@@ -31,8 +38,7 @@ function getCells(width, height) {
     return cells
 }
 
-const AllCells = []
-
+/** @class Animation representing the state of the canvas, with methods for executing the animation */
 class Animation{
     static defaultSeed = [[12, 12], [14, 13], [11, 14], [12, 14], [15, 14], [16, 14], [17, 14]]
 
@@ -66,30 +72,30 @@ class Animation{
         this.state.forEach((row, rowNumber) => {
             row.forEach((cell, columnNUmber) => {
                 if (cell) {
-                    c.fillStyle = '#5DA614'
+                    c.fillStyle = ['#5DA614','#8C5D42', '#F27E63'][Math.random() * 3 | 0]
                     c.fillRect(rowNumber, columnNUmber, 1, 1)
                 }
             })
         });
     }
 
-    coutsLiveNeighbours(cellX, cellY) {
+    countsLiveNeighbours(cellX, cellY) {
         let cells_status = []
         for (let x = -1; x <= 1; x++) {
             for(let y = -1; y <= 1; y++) {
                 cells_status.push(this.state[getX(cellX + x)][getY(cellY + y)])
             }
         }
-        cells_status.splice(4, 1)
+        cells_status.splice(4, 1)   // removing cell (cellX, cellY)
         return cells_status.reduce((x, y) => x + y)
     }
 
     isSurvived(cellX, cellY) {
-        return [2, 3].includes(this.coutsLiveNeighbours(cellX, cellY)) 
+        return [2, 3].includes(this.countsLiveNeighbours(cellX, cellY)) 
     }
 
     isAliveNextTick(cellX, cellY) {
-        return this.coutsLiveNeighbours(cellX, cellY) === 3
+        return this.countsLiveNeighbours(cellX, cellY) === 3
     }
     
     updateState() {
@@ -116,4 +122,5 @@ class Animation{
     }
 }
 
-const a = new Animation(.1)
+/* ON PAGE LOAD */
+const a = new Animation(.2)
