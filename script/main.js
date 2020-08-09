@@ -123,4 +123,4 @@ class Animation{
 }
 
 /* ON PAGE LOAD */
-const a = new Animation(.2)
+const animation = new Animation(.2)
