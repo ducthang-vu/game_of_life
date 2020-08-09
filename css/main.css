@@ -1,0 +1,85 @@
+/* GENERAL */
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+
+body {
+    font-family: 'Roboto Mono', monospace;
+}
+
+button,
+button:focus,
+a,
+input,
+label {
+    color: inherit;
+    background: inherit;
+    cursor: pointer;
+    outline: 0;
+    border: 0;
+}
+
+li {
+    list-style: none;
+}
+
+/* UTILITIES */
+.block {
+    display: block;
+}
+
+.no-display {
+    display: none;
+}
+
+.inline-fl-w {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.flex-w {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex {
+    display: flex;
+}
+
+.text-small {
+    font-size: 70%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.central {
+    margin: auto;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+.in-block {
+    display: inline-block;
+}
