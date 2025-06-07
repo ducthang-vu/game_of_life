@@ -101,14 +101,12 @@ li {
 
 /* BODY */
 body {
-    background-color: #00123B;
-    color: white;
+    background-color: #121212;
+    color: snow;
 }
 
 .page-header {
-    background-color: snow;
     padding: 25px;
-    color: black;
 }
 
 main > .container{
@@ -122,5 +120,6 @@ main > .container{
 
 #canvas {
     margin: 0 auto;
-    background: #04BFBF;
+    background: #121212;
+    border: 1px solid snow;
 }
