@@ -45,10 +45,10 @@ function createSelectColor() {
     }
 }
 
-/** @class Animation representing the state of the canvas, with methods for executing the animation */
-class Animation{
+/** @class Life representing the state of the game, with methods for advancing it and drawing it */
+class Life {
     /**
-     * The next state of the game, to be drawn in the next tick.
+     * The current state of the grid: true for each live cell.
      *
      * @type {boolean[][]}
      */
@@ -57,7 +57,7 @@ class Animation{
     #selectColor = createSelectColor()
 
     /**
-     * Creates an instance of Animation.
+     * Creates an instance of Life.
      *
      * @constructor
      * @param {number} [probability] The probability of any cell to be alive at the initial state, should be between 0
@@ -77,16 +77,15 @@ class Animation{
     }
 
     #nextTick() {
-        c.beginPath()
         c.clearRect(0, 0, canvas.width, canvas.height)
 
         // draw cells
         const color = this.#selectColor();
         this.#state.forEach((row, rowNumber) => {
-            row.forEach((cell, columnNUmber) => {
+            row.forEach((cell, columnNumber) => {
                 if (cell) {
                     c.fillStyle = color
-                    c.fillRect(rowNumber, columnNUmber, 1, 1)
+                    c.fillRect(rowNumber, columnNumber, 1, 1)
                 }
             })
         });
@@ -96,24 +95,24 @@ class Animation{
         for (let i = 0; i < maxWidth; i++) {
             for (let k = 0; k < maxHeight; k++) {
                 newState[i][k] = this.#state[i][k] ?
-                    this.#shouldSurvived(i, k) : this.#isAliveNextTick(i, k)
+                    this.#shouldSurvive(i, k) : this.#isAliveNextTick(i, k)
             }
         }
         this.#state = newState
     }
 
     #countsLiveNeighbours(cellX, cellY) {
-        let cells_status = []
+        let cellsStatus = []
         for (let x = -1; x <= 1; x++) {
             for(let y = -1; y <= 1; y++) {
-                cells_status.push(this.#state[getX(cellX + x)][getY(cellY + y)])
+                cellsStatus.push(this.#state[getX(cellX + x)][getY(cellY + y)])
             }
         }
-        cells_status.splice(4, 1)   // removing cell (cellX, cellY)
-        return cells_status.reduce((x, y) => x + y)
+        cellsStatus.splice(4, 1)   // removing cell (cellX, cellY)
+        return cellsStatus.reduce((x, y) => x + y)
     }
 
-    #shouldSurvived(cellX, cellY) {
+    #shouldSurvive(cellX, cellY) {
         return [2, 3].includes(this.#countsLiveNeighbours(cellX, cellY))
     }
 
@@ -123,5 +122,5 @@ class Animation{
 }
 
 /* ON PAGE LOAD */
-const animation = new Animation(.4)
-animation.animate()
+const life = new Life(.4)
+life.animate()
