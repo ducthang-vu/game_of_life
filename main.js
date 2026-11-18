@@ -54,6 +54,13 @@ class Life {
      */
     #state= getCells(maxWidth, maxHeight)
 
+    /**
+     * Second grid, reused as the target of each tick and then swapped with #state, so no grid is allocated per frame.
+     *
+     * @type {boolean[][]}
+     */
+    #nextState = getCells(maxWidth, maxHeight)
+
     #selectColor = createSelectColor()
 
     /**
@@ -90,26 +97,29 @@ class Life {
             })
         });
 
-        // create next state to be drawn in the next tick
-        let newState = getCells(maxWidth, maxHeight)
+        // compute the next state into the spare grid, then swap the two grids
         for (let i = 0; i < maxWidth; i++) {
             for (let k = 0; k < maxHeight; k++) {
-                newState[i][k] = this.#state[i][k] ?
+                this.#nextState[i][k] = this.#state[i][k] ?
                     this.#shouldSurvive(i, k) : this.#isAliveNextTick(i, k)
             }
         }
-        this.#state = newState
+        [this.#state, this.#nextState] = [this.#nextState, this.#state]
     }
 
     #countsLiveNeighbours(cellX, cellY) {
-        let cellsStatus = []
+        let count = 0
         for (let x = -1; x <= 1; x++) {
-            for(let y = -1; y <= 1; y++) {
-                cellsStatus.push(this.#state[getX(cellX + x)][getY(cellY + y)])
+            for (let y = -1; y <= 1; y++) {
+                if (x === 0 && y === 0) {
+                    continue
+                }
+                if (this.#state[getX(cellX + x)][getY(cellY + y)]) {
+                    count++
+                }
             }
         }
-        cellsStatus.splice(4, 1)   // removing cell (cellX, cellY)
-        return cellsStatus.reduce((x, y) => x + y)
+        return count
     }
 
     #shouldSurvive(cellX, cellY) {
