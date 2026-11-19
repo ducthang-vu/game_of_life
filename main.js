@@ -55,11 +55,11 @@ class Life {
     #state= getCells(maxWidth, maxHeight)
 
     /**
-     * Second grid, reused as the target of each tick and then swapped with #state, so no grid is allocated per frame.
+     * Scratch grid for computing each tick. After a tick it holds the previous generation, and it is overwritten in full on the next tick.
      *
      * @type {boolean[][]}
      */
-    #nextState = getCells(maxWidth, maxHeight)
+    #temporaryGrid = getCells(maxWidth, maxHeight)
 
     #selectColor = createSelectColor()
 
@@ -97,14 +97,14 @@ class Life {
             })
         });
 
-        // compute the next state into the spare grid, then swap the two grids
+        // compute the next generation into temporaryGrid, then swap the two grids
         for (let i = 0; i < maxWidth; i++) {
             for (let k = 0; k < maxHeight; k++) {
-                this.#nextState[i][k] = this.#state[i][k] ?
+                this.#temporaryGrid[i][k] = this.#state[i][k] ?
                     this.#shouldSurvive(i, k) : this.#isAliveNextTick(i, k)
             }
         }
-        [this.#state, this.#nextState] = [this.#nextState, this.#state]
+        [this.#state, this.#temporaryGrid] = [this.#temporaryGrid, this.#state]
     }
 
     #countsLiveNeighbours(cellX, cellY) {
